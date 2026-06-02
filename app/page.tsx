@@ -1,5 +1,11 @@
-import { Button } from "@/components/ui/button"
+import WelcomeSection from "@/components/home-page/WelcomeSection"
+import AboutSection from "@/components/home-page/AboutSection"
 
 export default function Page() {
-  return <div className="flex min-h-svh p-6"></div>
+  return (
+    <main>
+      <WelcomeSection />
+      <AboutSection />
+    </main>
+  )
 }
