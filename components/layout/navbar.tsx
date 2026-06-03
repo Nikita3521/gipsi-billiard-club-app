@@ -18,7 +18,7 @@ export default function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:h-18">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/images/logo.png"
+            src="/images/logo.webp"
             alt="Gipsi Billiard Club logo"
             width={50}
             height={50}
