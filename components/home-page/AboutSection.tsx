@@ -23,7 +23,10 @@ export default function AboutSection() {
   }, [isPlaying])
 
   return (
-    <section className="relative overflow-hidden bg-[radial-gradient(circle_at_center,#0b2347_0%,#07142b_55%,#000000_100%)] text-white">
+    <section
+      id="details"
+      className="relative overflow-hidden bg-[radial-gradient(circle_at_center,#0b2347_0%,#07142b_55%,#000000_100%)] text-white"
+    >
       <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-8">
         <div className="relative overflow-hidden border border-white/10 bg-black/20 shadow-[0_28px_80px_rgba(0,0,0,0.35)]">
           <div className="relative aspect-[4/5] min-h-[30rem] lg:min-h-[42rem]">
