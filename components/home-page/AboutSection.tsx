@@ -4,9 +4,9 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Medal } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { slides } from "@/lib/slides"
-import { entertainments } from "@/lib/entertainments"
+import { cn } from "@/consts/utils"
+import { slides } from "@/consts/slides"
+import { entertainments } from "@/consts/entertainments"
 import Button from "../ui/button"
 
 export default function AboutSection() {
