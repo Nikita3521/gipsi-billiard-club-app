@@ -1,6 +1,7 @@
 import WelcomeSection from "@/components/home-page/WelcomeSection"
 import AboutSection from "@/components/home-page/AboutSection"
 import OpeningHoursSection from "@/components/home-page/OpeningHoursSection"
+import PrivateLessonsSection from "@/components/home-page/PrivateLessonsSection"
 
 export default function Page() {
   return (
@@ -8,6 +9,7 @@ export default function Page() {
       <WelcomeSection />
       <AboutSection />
       <OpeningHoursSection />
+      <PrivateLessonsSection />
     </main>
   )
 }

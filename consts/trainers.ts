@@ -1,0 +1,66 @@
+export const trainers = [
+  {
+    image: "/images/trainer1.webp",
+    name: "Maksym Viktorovych Illichev",
+    bio: [
+      "Master of Sport since 1999",
+      "More than 20 years of coaching experience",
+      "Absolute Champion of Moldova (2003-2004)",
+      "Helping players develop a winning mindset",
+      "Individual training based on a proprietary coaching methodology",
+    ],
+    number: "+380 67 123 45 67",
+  },
+  {
+    image: "/images/trainer2.webp",
+    name: "Mikheil Kiladze",
+    bio: [
+      "Teaching players to master the game with style and precision",
+      "European Cup Champion",
+      "Multiple National Tournament Champion",
+      "Winner of Major International Competitions",
+      "Former Member of the National Team",
+    ],
+    number: "+380 67 584 29 13",
+  },
+  {
+    image: "/images/trainer3.webp",
+    name: "Serhii Oleksandrovych Aheienko",
+    bio: [
+      "Highest Category Billiards Coach",
+      "More than 20 years of coaching experience",
+      "National and International Certified Referee",
+      "Worked with athletes who achieved medals at European and national championships",
+      "Developed multiple Master of Sport and Candidate Master of Sport athletes",
+      "Uses advanced mirror-training techniques to quickly improve stance, positioning, and shot accuracy",
+    ],
+    number: "+380 63 696 89 88",
+  },
+  {
+    image: "/images/trainer4.webp",
+    name: "Dmytro Dmytrovych Shkoda",
+    bio: [
+      "Master of Sport in Billiards",
+      "Bronze Medalist of World Cup and Euro Tour Events (2010-2016)",
+      "Bronze Medalist of the National Championship (2011)",
+      "Multiple-Time City Champion (2011-2017)",
+      "Winner and Medalist of International Commercial Tournaments",
+      "Silver Medalist of the I. I. Savvidi Cup (2016)",
+      "Individual coaching for adults and children",
+    ],
+    number: "+380 67 078 87 88",
+  },
+  {
+    image: "/images/trainer0.webp",
+    name: "Sviatoslav Semenov",
+    bio: [
+      "Degree in Billiards Coaching from the Belarusian State University of Physical Culture",
+      "More than 13 years of coaching experience",
+      "Master of Sport in Russian Billiards",
+      "Master of Sport in Pool",
+      "Multiple-Time National Champion",
+      "Provides training for players of all skill levels",
+    ],
+    number: "+380 93 334 52 62",
+  },
+]
