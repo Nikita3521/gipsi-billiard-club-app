@@ -123,14 +123,12 @@ export default function PrivateLessonsSection() {
                 }}
                 aria-label={`Show trainer ${index + 1}`}
                 className={cn(
-                  "grid h-8 min-w-8 place-items-center rounded-full border text-xs font-semibold transition-all",
+                  "grid cursor-pointer place-items-center text-xs font-semibold hover:scale-110 hover:border-[#C9A24E]",
                   index === activeTrainer
-                    ? "border-gold bg-gold text-white"
-                    : "border-white/15 bg-white/5 text-white/70 hover:border-gold/60 hover:text-gold"
+                    ? "h-5 w-5 scale-125 rounded-full bg-[#C9A24E] shadow-[0_0_12px_rgba(201,162,78,0.6)] transition-all duration-300"
+                    : "h-5 w-5 rounded-full border border-white/20 bg-transparent transition-all duration-300"
                 )}
-              >
-                {index + 1}
-              </button>
+              ></button>
             ))}
           </div>
         </div>
