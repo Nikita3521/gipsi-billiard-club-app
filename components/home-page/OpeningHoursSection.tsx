@@ -10,7 +10,7 @@ export default function OpeningHoursSection() {
         <div className="relative mx-auto grid min-h-[calc(100vh-64px)] w-full max-w-7xl items-center px-4 py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(26rem,0.95fr)] lg:py-8">
           <div className="max-w-[42rem]">
             <h2 className="max-w-[12ch] text-2xl leading-[0.95] font-black tracking-[-0.05em] text-white uppercase sm:text-6xl">
-              We're open when you are
+              We&apos;re open when you are
             </h2>
 
             <div className="mt-10 border-t border-white/10">
