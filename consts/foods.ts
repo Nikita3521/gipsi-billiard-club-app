@@ -39,4 +39,4 @@ export const foods = [
     alt: "Waffles served with a golden caramel tone",
     label: "Waffles",
   },
-] as const
+]

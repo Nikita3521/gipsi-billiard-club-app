@@ -87,6 +87,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    background: linear-gradient(180deg, #0b2347 0%, #07142b 40%, #000000 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
   }
   html {
     @apply font-sans;
