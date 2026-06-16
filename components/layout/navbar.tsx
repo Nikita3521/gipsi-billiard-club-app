@@ -1,16 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
-import { NavLink } from "./nav-link"
+import { NavLink } from "./NavLink"
 import Button from "../ui/button"
-
-const navigation = [
-  { href: "/", label: "Home" },
-  { href: "/booking", label: "Booking" },
-  { href: "/discounts", label: "Discounts" },
-  { href: "/files/menu.pdf", label: "Menu" },
-  { href: "/tournaments", label: "Tournaments" },
-  { href: "/contacts", label: "Contacts" },
-]
+import { navigation } from "@/consts/navigation"
 
 export default function Navbar() {
   return (
