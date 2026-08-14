@@ -8,7 +8,6 @@ export interface TournamentDetails {
   maxParticipants: number
   registeredCount: number
   entryFee: string
-  image: string
   description: string
   rules: string[]
 }
@@ -23,7 +22,6 @@ export const tournamentDetails: TournamentDetails = {
   maxParticipants: 64,
   registeredCount: 8,
   entryFee: "$50 entry fee",
-  image: "/images/tournament.webp",
   description:
     "Our biggest event of the summer. 64 players, single elimination bracket, one champion. Compete for the prize pool, bragging rights, and a permanent spot on our wall of fame.",
   rules: [

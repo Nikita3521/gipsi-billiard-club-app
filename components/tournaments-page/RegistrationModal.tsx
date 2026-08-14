@@ -1,44 +1,57 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { X, CheckCircle2 } from "lucide-react"
 import Button from "../ui/button"
+import { registerForTournament } from "@/app/tournaments/actions"
 
 interface RegistrationModalProps {
   isOpen: boolean
   onClose: () => void
+  tournamentId: string
 }
 
 export default function RegistrationModal({
   isOpen,
   onClose,
+  tournamentId,
 }: RegistrationModalProps) {
   const [fullName, setFullName] = useState("")
   const [phone, setPhone] = useState("")
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [isPending, startTransition] = useTransition()
 
   if (!isOpen) return null
 
-  const isValid = fullName.trim().length > 5 && phone.trim().length >= 13
+  const isValid = fullName.trim().length > 3 && phone.trim().length >= 10
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!isValid) return
 
-    setIsSubmitting(true)
+    setError(null)
 
-    // TODO: заменить на реальный запрос к API
-    await new Promise((resolve) => setTimeout(resolve, 600))
+    startTransition(async () => {
+      const result = await registerForTournament({
+        fullName,
+        phone,
+        tournamentId,
+      })
 
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+      if (result.success) {
+        setIsSubmitted(true)
+      } else {
+        setError(result.error)
+      }
+    })
   }
 
   const handleClose = () => {
     onClose()
     setTimeout(() => {
       setIsSubmitted(false)
+      setError(null)
       setFullName("")
       setPhone("")
     }, 300)
@@ -94,13 +107,13 @@ export default function RegistrationModal({
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
               <div>
                 <label
-                  htmlFor="firstName"
+                  htmlFor="fullName"
                   className="text-xs font-semibold tracking-[0.15em] text-white/50 uppercase"
                 >
                   Full name
                 </label>
                 <input
-                  id="firstName"
+                  id="fullName"
                   type="text"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
@@ -126,12 +139,16 @@ export default function RegistrationModal({
                 />
               </div>
 
+              {error && (
+                <p className="text-sm font-medium text-red-400">{error}</p>
+              )}
+
               <Button
                 type="submit"
-                disabled={!isValid || isSubmitting}
+                disabled={!isValid || isPending}
                 className="mt-2 w-full disabled:cursor-not-allowed disabled:opacity-40"
               >
-                {isSubmitting ? "Submitting..." : "Confirm registration"}
+                {isPending ? "Submitting..." : "Confirm registration"}
               </Button>
             </form>
           </>

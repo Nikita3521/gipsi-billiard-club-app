@@ -92,12 +92,11 @@ export default function TableSection({
     return days
   }, [date])
 
-  // ИСПРАВЛЕНО: Убрали жесткий захардкоженный мок для 14:00 и 18:00, теперь проверяем реальные данные
   const isSlotBooked = (tableNum: number, timeStr: string, dateStr: string) => {
     if (dateStr === date && timeStr === time) {
       return bookedTables.includes(tableNum)
     }
-    return false // Для полноценной шкалы времени остальных дней здесь должен быть отдельный fetch запрос
+    return false
   }
 
   return (
