@@ -47,8 +47,8 @@ model Table {
 
 model TelegramSession {
   id        String   @id @default(cuid())
-  token     String   @unique // Случайный код, который улетает в ссылку бота
-  status    String   @default("PENDING") // PENDING, APPROVED
+  token     String   @unique
+  status    String   @default("PENDING")
   phone     String?
   chatId    String?
   createdAt DateTime @default(now())

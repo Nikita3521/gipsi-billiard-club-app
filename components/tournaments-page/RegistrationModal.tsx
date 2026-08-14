@@ -13,18 +13,14 @@ export default function RegistrationModal({
   isOpen,
   onClose,
 }: RegistrationModalProps) {
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
+  const [fullName, setFullName] = useState("")
   const [phone, setPhone] = useState("")
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   if (!isOpen) return null
 
-  const isValid =
-    firstName.trim().length > 0 &&
-    lastName.trim().length > 0 &&
-    phone.trim().length > 0
+  const isValid = fullName.trim().length > 5 && phone.trim().length >= 13
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -43,8 +39,7 @@ export default function RegistrationModal({
     onClose()
     setTimeout(() => {
       setIsSubmitted(false)
-      setFirstName("")
-      setLastName("")
+      setFullName("")
       setPhone("")
     }, 300)
   }
@@ -102,31 +97,14 @@ export default function RegistrationModal({
                   htmlFor="firstName"
                   className="text-xs font-semibold tracking-[0.15em] text-white/50 uppercase"
                 >
-                  First name
+                  Full name
                 </label>
                 <input
                   id="firstName"
                   type="text"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="John"
-                  className="mt-2 w-full border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:border-gold/60 focus:outline-none"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="lastName"
-                  className="text-xs font-semibold tracking-[0.15em] text-white/50 uppercase"
-                >
-                  Last name
-                </label>
-                <input
-                  id="lastName"
-                  type="text"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  placeholder="Smith"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  placeholder="Leydez Nikita"
                   className="mt-2 w-full border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:border-gold/60 focus:outline-none"
                 />
               </div>
@@ -143,7 +121,7 @@ export default function RegistrationModal({
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder="+1 234 567 8900"
+                  placeholder="+380XXXXXXXXX"
                   className="mt-2 w-full border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:border-gold/60 focus:outline-none"
                 />
               </div>

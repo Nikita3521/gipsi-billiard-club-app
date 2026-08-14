@@ -207,11 +207,11 @@ export default function CheckoutFormContent(props: CheckoutFormContentProps) {
         <div className="space-y-2">
           <label className="flex items-center gap-2 text-xs font-bold tracking-wider text-slate-400 uppercase">
             <User size={14} className="text-amber-500/80" />
-            Name *
+            Full name *
           </label>
           <input
             type="text"
-            placeholder="John"
+            placeholder="Leydez Nikita"
             value={formData.name}
             onChange={(e) => {
               setFormData({ ...formData, name: e.target.value })
