@@ -19,3 +19,5 @@ To use the components in your app, import them as follows:
 ```tsx
 import { Button } from "@/components/ui/button";
 ```
+
+https://api.telegram.org/bot<ВАШ_TELEGRAM_BOT_TOKEN>/setWebhook?url=https://<ВАШ_NGROK_DOMEN>/api/bot&secret_token=<ВАШ_TELEGRAM_WEBHOOK_SECRET>

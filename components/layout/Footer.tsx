@@ -6,9 +6,9 @@ import {
   number,
   email,
   googleMapsReviewsUrl,
+  location,
 } from "@/consts/links"
 import { Phone, Mail } from "lucide-react"
-import { location } from "@/consts/location"
 import { navigation } from "@/consts/navigation"
 
 export default function Footer() {
@@ -75,18 +75,16 @@ export default function Footer() {
               Opening Hours
             </h3>
             <ul className="space-y-2">
-              {openingHours.map((item) => (
-                <li
-                  key={item.day}
-                  className="flex justify-between gap-4 text-sm"
-                >
-                  <span className="text-white/70">{item.day}</span>
-                  <span className="text-white/70">{item.time}</span>
+              {Object.entries(openingHours).map(([day, hours]) => (
+                <li key={day} className="flex justify-between gap-4 text-sm">
+                  <span className="text-white/70">{day}</span>
+                  <span className="text-white/70">
+                    {hours.start} - {hours.end}
+                  </span>
                 </li>
               ))}
             </ul>
           </div>
-
           <div>
             <h3 className="mb-4 text-xs font-bold tracking-[0.2em] text-gold uppercase">
               Contact & Socials

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Medal } from "lucide-react"
@@ -10,14 +10,49 @@ import { entertainments } from "@/consts/entertainments"
 import Button from "../ui/button"
 import CarouselGeneral from "../ui/CarouselGeneral"
 
+function useInView<T extends HTMLElement>(threshold = 0.25) {
+  const ref = useRef<T>(null)
+  const [inView, setInView] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true)
+          observer.disconnect()
+        }
+      },
+      { threshold }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [threshold])
+
+  return { ref, inView }
+}
+
 export default function AboutSection() {
   const [activeSlide, setActiveSlide] = useState(0)
   const [isPlaying, setIsPlaying] = useState(true)
+  const { ref: sectionRef, inView } = useInView<HTMLElement>(0.15)
 
   return (
-    <section id="details" className="relative overflow-hidden text-white">
+    <section
+      id="details"
+      ref={sectionRef}
+      className="relative overflow-hidden text-white"
+    >
       <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-8">
-        <div className="relative overflow-hidden border border-white/10 bg-black/20 shadow-[0_28px_80px_rgba(0,0,0,0.35)]">
+        <div
+          className={cn(
+            "relative overflow-hidden border border-white/10 bg-black/20 shadow-[0_28px_80px_rgba(0,0,0,0.35)] transition-all duration-1000 ease-out",
+            inView ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
+          )}
+        >
           <div className="relative aspect-[4/5] min-h-[30rem] lg:min-h-[42rem]">
             <CarouselGeneral
               items={slides}
@@ -62,13 +97,30 @@ export default function AboutSection() {
 
         <div className="flex flex-col gap-10 lg:pt-2">
           <div className="space-y-4">
-            <h2 className="max-w-2xl text-3xl leading-tight font-extrabold tracking-tight text-white sm:text-4xl lg:text-[2.25rem] lg:leading-[1.05]">
-              GIPSI BILLIARD CLUB
-            </h2>
+            <div className="overflow-hidden">
+              <h2
+                className={cn(
+                  "max-w-2xl text-3xl leading-tight font-extrabold tracking-tight text-white transition-transform duration-700 ease-out sm:text-4xl lg:text-[2.25rem] lg:leading-[1.05]",
+                  inView ? "translate-y-0" : "translate-y-full"
+                )}
+              >
+                GIPSI BILLIARD CLUB
+              </h2>
+            </div>
 
-            <div className="h-1 w-40 bg-gold/70" />
+            <div
+              className={cn(
+                "h-1 bg-gold/70 shadow-[0_0_10px_rgba(212,175,55,0.5)] transition-all delay-300 duration-700 ease-out",
+                inView ? "w-40" : "w-0"
+              )}
+            />
 
-            <p className="max-w-2xl text-base leading-7 font-light text-white/70 sm:text-lg">
+            <p
+              className={cn(
+                "max-w-2xl text-base leading-7 font-light text-white/70 transition-all delay-500 duration-1000 ease-out sm:text-lg",
+                inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+              )}
+            >
               Welcome to our world of billiards, where the game is not just a
               pastime but a way of life. We celebrate the elegance, strategy,
               and social connections that billiards foster. Our mission is to
@@ -79,7 +131,12 @@ export default function AboutSection() {
           </div>
 
           <div className="space-y-8 pt-4 lg:pt-10">
-            <p className="max-w-md text-sm leading-6 font-semibold text-white/90 sm:text-base">
+            <p
+              className={cn(
+                "max-w-md text-sm leading-6 font-semibold text-white/90 transition-all delay-700 duration-700 ease-out sm:text-base",
+                inView ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+              )}
+            >
               At Peaky Sticks Billiards Academy, we offer a wide range of
               entertainment options:
             </p>
@@ -103,14 +160,27 @@ export default function AboutSection() {
                       setActiveSlide(index)
                     }}
                     tabIndex={0}
-                    className="cursor-pointer text-sm leading-6 font-semibold text-white/80 before:text-gold before:content-['✓_'] hover:text-gold"
+                    style={{
+                      transitionDelay: inView ? `${800 + index * 80}ms` : "0ms",
+                    }}
+                    className={cn(
+                      "cursor-pointer text-sm leading-6 font-semibold text-white/80 transition-all duration-500 ease-out before:text-gold before:content-['✓_'] hover:text-gold",
+                      inView
+                        ? "translate-x-0 opacity-100"
+                        : "-translate-x-3 opacity-0"
+                    )}
                   >
                     {item}
                   </li>
                 ))}
               </ul>
 
-              <div className="grid min-h-[220px] place-items-center border-4 border-gold/60 bg-[#0b1e3f] px-6 py-8 text-center shadow-[0_18px_60px_rgba(0,0,0,0.2)]">
+              <div
+                className={cn(
+                  "grid min-h-[220px] place-items-center border-4 border-gold/60 bg-[#0b1e3f] px-6 py-8 text-center shadow-[0_18px_60px_rgba(0,0,0,0.2)] transition-all delay-900 duration-700 ease-out",
+                  inView ? "scale-100 opacity-100" : "scale-90 opacity-0"
+                )}
+              >
                 <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-white text-white">
                   <Medal className="h-10 w-10" />
                 </div>
@@ -121,7 +191,12 @@ export default function AboutSection() {
               </div>
             </div>
 
-            <div className="flex justify-end">
+            <div
+              className={cn(
+                "flex justify-end transition-all delay-1000 duration-700 ease-out",
+                inView ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+              )}
+            >
               <Button className="min-w-55">
                 <Link href="/booking">Book table</Link>
               </Button>

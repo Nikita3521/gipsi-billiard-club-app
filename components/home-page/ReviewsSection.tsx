@@ -2,6 +2,8 @@
 
 import { ReactGoogleReviews } from "react-google-reviews"
 import Link from "next/link"
+import { cn } from "@/consts/utils"
+import { useInView } from "@/hooks/useInView"
 import Button from "../ui/button"
 import { STATIC_REVIEWS } from "@/consts/reviews"
 import { googleMapsReviewsUrl } from "@/consts/links"
@@ -47,18 +49,40 @@ function StarRow({
 export default function ReviewsSection() {
   const fallbackCount = 6
   const fallbackRating = "5.0"
+  const { ref, inView } = useInView<HTMLElement>(0.1)
 
   return (
-    <section id="reviews" className="relative text-white lg:py-8">
+    <section id="reviews" ref={ref} className="relative text-white lg:py-8">
       <div className="relative mx-auto w-full max-w-7xl px-4">
         <div className="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-center">
           <div className="space-y-8">
             <div className="max-w-2xl space-y-4">
-              <h2 className="text-3xl leading-tight font-extrabold tracking-tight text-white sm:text-4xl lg:text-[2.25rem]">
-                Reviews on Google
-              </h2>
-              <div className="h-1 w-32 bg-gold/70" />
-              <p className="max-w-xl text-base leading-7 font-light text-white/70">
+              <div className="overflow-hidden">
+                <h2
+                  className={cn(
+                    "text-3xl leading-tight font-extrabold tracking-tight text-white transition-transform duration-700 ease-out sm:text-4xl lg:text-[2.25rem]",
+                    inView ? "translate-y-0" : "translate-y-full"
+                  )}
+                >
+                  Reviews on Google
+                </h2>
+              </div>
+
+              <div
+                className={cn(
+                  "h-1 bg-gold/70 shadow-[0_0_10px_rgba(212,175,55,0.5)] transition-all delay-200 duration-700 ease-out",
+                  inView ? "w-32" : "w-0"
+                )}
+              />
+
+              <p
+                className={cn(
+                  "max-w-xl text-base leading-7 font-light text-white/70 transition-all delay-400 duration-700 ease-out",
+                  inView
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-3 opacity-0"
+                )}
+              >
                 We constantly strive for perfection by listening directly to
                 your feedback. See what others are saying today, or click below
                 to share your personal experience with us.
@@ -66,10 +90,18 @@ export default function ReviewsSection() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              {STATIC_REVIEWS.map((review) => (
+              {STATIC_REVIEWS.map((review, index) => (
                 <article
                   key={review.id}
-                  className="flex flex-col gap-4 rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+                  style={{
+                    transitionDelay: inView ? `${600 + index * 120}ms` : "0ms",
+                  }}
+                  className={cn(
+                    "flex flex-col gap-4 rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-600 ease-out",
+                    inView
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-6 opacity-0"
+                  )}
                 >
                   <div className="space-y-1">
                     <StarRow rating={review.rating} />
@@ -111,12 +143,22 @@ export default function ReviewsSection() {
                 const liveCount = hasReviews ? reviews.length : fallbackCount
 
                 return (
-                  <div className="w-full max-w-xs rounded-xl border border-white/10 bg-white/5 p-8 text-center backdrop-blur-sm">
+                  <div
+                    className={cn(
+                      "w-full max-w-xs rounded-xl border border-white/10 bg-white/5 p-8 text-center backdrop-blur-sm transition-all delay-300 duration-1000 ease-out",
+                      inView ? "scale-100 opacity-100" : "scale-90 opacity-0"
+                    )}
+                  >
                     <p className="text-lg font-bold tracking-[0.2em] text-gold uppercase">
                       Google rating
                     </p>
 
-                    <div className="mx-auto mt-6 grid h-44 w-44 place-items-center rounded-full border border-white/10 bg-gradient-to-b from-white/[0.02] to-transparent">
+                    <div
+                      className={cn(
+                        "mx-auto mt-6 grid h-44 w-44 place-items-center rounded-full border border-white/10 bg-gradient-to-b from-white/[0.02] to-transparent transition-all delay-700 duration-700 ease-out",
+                        inView ? "rotate-0 opacity-100" : "-rotate-90 opacity-0"
+                      )}
+                    >
                       <div className="text-center">
                         <div className="mb-1 text-5xl font-black tracking-tight text-white">
                           {liveRating}
