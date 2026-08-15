@@ -80,7 +80,7 @@ export default function CarouselGeneral({
     <>
       <div
         className={cn(
-          "relative overflow-hidden border border-white/10 bg-[#08152b]/95 text-white shadow-[0_26px_90px_rgba(0,0,0,0.45)] lg:h-[500px]",
+          "relative h-full w-full overflow-hidden border border-white/10 bg-[#08152b]/95 text-white shadow-[0_26px_90px_rgba(0,0,0,0.45)]",
           className
         )}
       >
@@ -88,7 +88,7 @@ export default function CarouselGeneral({
           <article
             key={item.name || item.src}
             className={cn(
-              "absolute inset-0 grid transition-all duration-700 ease-out lg:grid-cols-[minmax(18rem,0.42fr)_minmax(0,0.58fr)]",
+              "absolute inset-0 flex flex-col transition-all duration-700 ease-out lg:grid lg:grid-cols-[minmax(18rem,0.42fr)_minmax(0,0.58fr)]",
               index === active
                 ? "translate-x-0 opacity-100"
                 : "pointer-events-none translate-x-2 opacity-0"
@@ -101,7 +101,7 @@ export default function CarouselGeneral({
               <>
                 {item.image && item.name && (
                   <>
-                    <div className="relative min-h-[320px] overflow-hidden lg:min-h-0">
+                    <div className="relative flex-1 overflow-hidden lg:min-h-0">
                       <Image
                         src={item.image}
                         alt={item.name}

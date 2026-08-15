@@ -1,39 +1,15 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Medal } from "lucide-react"
 import { cn } from "@/consts/utils"
 import { slides } from "@/consts/slides"
 import { entertainments } from "@/consts/entertainments"
+import { useInView } from "@/hooks/useInView"
 import Button from "../ui/button"
 import CarouselGeneral from "../ui/CarouselGeneral"
-
-function useInView<T extends HTMLElement>(threshold = 0.25) {
-  const ref = useRef<T>(null)
-  const [inView, setInView] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true)
-          observer.disconnect()
-        }
-      },
-      { threshold }
-    )
-
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [threshold])
-
-  return { ref, inView }
-}
 
 export default function AboutSection() {
   const [activeSlide, setActiveSlide] = useState(0)
@@ -46,19 +22,20 @@ export default function AboutSection() {
       ref={sectionRef}
       className="relative overflow-hidden text-white"
     >
-      <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-8">
+      <div className="relative mx-auto grid w-full max-w-7xl gap-8 px-4 py-10 sm:gap-10 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-8">
+        {/* Carousel */}
         <div
           className={cn(
-            "relative overflow-hidden border border-white/10 bg-black/20 shadow-[0_28px_80px_rgba(0,0,0,0.35)] transition-all duration-1000 ease-out",
+            "relative order-1 overflow-hidden border border-white/10 bg-black/20 shadow-[0_28px_80px_rgba(0,0,0,0.35)] transition-all duration-1000 ease-out lg:order-none",
             inView ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
           )}
         >
-          <div className="relative aspect-[4/5] min-h-[30rem] lg:min-h-[42rem]">
+          <div className="relative aspect-[4/3] min-h-[16rem] sm:aspect-[4/5] sm:min-h-[24rem] lg:min-h-[42rem]">
             <CarouselGeneral
               items={slides}
               interval={2500}
               hideDots={true}
-              className="border-0 bg-transparent shadow-none lg:h-full"
+              className="h-full border-0 bg-transparent shadow-none"
               activeIndex={activeSlide}
               onActiveChange={setActiveSlide}
               isPlaying={isPlaying}
@@ -85,9 +62,9 @@ export default function AboutSection() {
 
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,20,43,0.08)_0%,rgba(7,20,43,0.1)_35%,rgba(7,20,43,0.55)_100%)]" />
 
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7">
-              <div className="hidden items-center gap-2 rounded-full border border-white/12 bg-black/30 px-4 py-2 text-xs tracking-[0.28em] text-white/80 uppercase backdrop-blur-sm sm:flex">
-                <span className="h-2 w-2 rounded-full bg-gold" />
+            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-4 sm:p-5 lg:p-7">
+              <div className="flex items-center gap-2 rounded-full border border-white/12 bg-black/30 px-3 py-1.5 text-[0.65rem] tracking-[0.24em] text-white/80 uppercase backdrop-blur-sm sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.28em]">
+                <span className="h-1.5 w-1.5 rounded-full bg-gold sm:h-2 sm:w-2" />
                 {String(activeSlide + 1).padStart(2, "0")} /{" "}
                 {String(slides.length).padStart(2, "0")}
               </div>
@@ -95,12 +72,13 @@ export default function AboutSection() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-10 lg:pt-2">
-          <div className="space-y-4">
+        {/* Content */}
+        <div className="order-2 flex flex-col gap-8 lg:order-none lg:gap-10 lg:pt-2">
+          <div className="space-y-3 sm:space-y-4">
             <div className="overflow-hidden">
               <h2
                 className={cn(
-                  "max-w-2xl text-3xl leading-tight font-extrabold tracking-tight text-white transition-transform duration-700 ease-out sm:text-4xl lg:text-[2.25rem] lg:leading-[1.05]",
+                  "max-w-2xl text-2xl leading-tight font-extrabold tracking-tight text-white transition-transform duration-700 ease-out sm:text-3xl lg:text-4xl lg:leading-[1.05]",
                   inView ? "translate-y-0" : "translate-y-full"
                 )}
               >
@@ -111,13 +89,13 @@ export default function AboutSection() {
             <div
               className={cn(
                 "h-1 bg-gold/70 shadow-[0_0_10px_rgba(212,175,55,0.5)] transition-all delay-300 duration-700 ease-out",
-                inView ? "w-40" : "w-0"
+                inView ? "w-28 sm:w-40" : "w-0"
               )}
             />
 
             <p
               className={cn(
-                "max-w-2xl text-base leading-7 font-light text-white/70 transition-all delay-500 duration-1000 ease-out sm:text-lg",
+                "max-w-2xl text-sm leading-6 font-light text-white/70 transition-all delay-500 duration-1000 ease-out sm:text-base sm:leading-7 lg:text-lg",
                 inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
               )}
             >
@@ -130,7 +108,7 @@ export default function AboutSection() {
             </p>
           </div>
 
-          <div className="space-y-8 pt-4 lg:pt-10">
+          <div className="space-y-6 sm:space-y-8 lg:pt-10">
             <p
               className={cn(
                 "max-w-md text-sm leading-6 font-semibold text-white/90 transition-all delay-700 duration-700 ease-out sm:text-base",
@@ -141,7 +119,7 @@ export default function AboutSection() {
               entertainment options:
             </p>
 
-            <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_220px] lg:items-start">
+            <div className="grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_220px] lg:items-start">
               <ul className="flex flex-col">
                 {entertainments.map((item, index) => (
                   <li
@@ -164,7 +142,7 @@ export default function AboutSection() {
                       transitionDelay: inView ? `${800 + index * 80}ms` : "0ms",
                     }}
                     className={cn(
-                      "cursor-pointer text-sm leading-6 font-semibold text-white/80 transition-all duration-500 ease-out before:text-gold before:content-['✓_'] hover:text-gold",
+                      "cursor-pointer border-b border-white/5 py-2.5 text-sm leading-6 font-semibold text-white/80 transition-all duration-500 ease-out before:text-gold before:content-['✓_'] hover:text-gold sm:border-0 sm:py-0",
                       inView
                         ? "translate-x-0 opacity-100"
                         : "-translate-x-3 opacity-0"
@@ -177,15 +155,15 @@ export default function AboutSection() {
 
               <div
                 className={cn(
-                  "grid min-h-[220px] place-items-center border-4 border-gold/60 bg-[#0b1e3f] px-6 py-8 text-center shadow-[0_18px_60px_rgba(0,0,0,0.2)] transition-all delay-900 duration-700 ease-out",
+                  "flex min-h-[7rem] flex-row items-center gap-4 border-4 border-gold/60 bg-[#0b1e3f] px-5 py-5 text-left shadow-[0_18px_60px_rgba(0,0,0,0.2)] transition-all delay-900 duration-700 ease-out sm:min-h-[220px] sm:flex-col sm:items-center sm:gap-0 sm:px-6 sm:py-8 sm:text-center",
                   inView ? "scale-100 opacity-100" : "scale-90 opacity-0"
                 )}
               >
-                <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-white text-white">
-                  <Medal className="h-10 w-10" />
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-white text-white sm:h-20 sm:w-20">
+                  <Medal className="h-7 w-7 sm:h-10 sm:w-10" />
                 </div>
 
-                <p className="mt-6 max-w-[10rem] text-lg leading-6 font-semibold text-gold">
+                <p className="max-w-[10rem] text-base leading-6 font-semibold text-gold sm:mt-6 sm:text-lg">
                   Your premium escape from ordinary
                 </p>
               </div>
@@ -193,11 +171,11 @@ export default function AboutSection() {
 
             <div
               className={cn(
-                "flex justify-end transition-all delay-1000 duration-700 ease-out",
+                "flex justify-center transition-all delay-1000 duration-700 ease-out sm:justify-end",
                 inView ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
               )}
             >
-              <Button className="min-w-55">
+              <Button className="w-full sm:w-auto sm:min-w-55">
                 <Link href="/booking">Book table</Link>
               </Button>
             </div>
