@@ -175,7 +175,8 @@ export default function TableSection({
                     onClick={() => !isBooked && setSelectedTable(table.id)}
                     disabled={isBooked}
                     className={cn(
-                      "absolute z-10 flex w-[12.6%] items-center justify-center rounded-sm border-2 text-4xl font-bold text-white transition-all duration-300",
+                      /* Заменили text-4xl на text-xl для мобильных и min-[500px]:text-4xl для больших экранов */
+                      "absolute z-10 flex w-[12.6%] items-center justify-center rounded-sm border-2 text-xl font-bold text-white transition-all duration-300 min-[500px]:text-4xl",
                       table.id === "1" || table.id === "2"
                         ? "h-[10.9%]"
                         : "h-[9.6%]",
