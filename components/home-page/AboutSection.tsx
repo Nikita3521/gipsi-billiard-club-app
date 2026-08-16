@@ -30,19 +30,19 @@ export default function AboutSection() {
             inView ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
           )}
         >
-          <div className="relative aspect-[4/3] min-h-[16rem] sm:aspect-[4/5] sm:min-h-[24rem] lg:min-h-[42rem]">
+          <div className="relative h-[16rem] w-full sm:h-[24rem] lg:h-[42rem]">
             <CarouselGeneral
               items={slides}
               interval={2500}
               hideDots={true}
-              className="h-full border-0 bg-transparent shadow-none"
+              className="h-full w-full border-0 bg-transparent shadow-none"
               activeIndex={activeSlide}
               onActiveChange={setActiveSlide}
               isPlaying={isPlaying}
               renderItem={(item, index, isActive) => (
                 <div
                   className={cn(
-                    "absolute inset-0 transition-all duration-700 ease-out",
+                    "absolute inset-0 h-full w-full transition-all duration-700 ease-out",
                     isActive
                       ? "scale-100 opacity-100"
                       : "pointer-events-none scale-[1.03] opacity-0"
@@ -53,7 +53,7 @@ export default function AboutSection() {
                     alt={item.alt || ""}
                     fill
                     priority={index === 0}
-                    sizes="(min-width: 1024px) 52vw, 100vw"
+                    sizes="100vw"
                     className="object-cover object-center"
                   />
                 </div>
@@ -61,14 +61,6 @@ export default function AboutSection() {
             />
 
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,20,43,0.08)_0%,rgba(7,20,43,0.1)_35%,rgba(7,20,43,0.55)_100%)]" />
-
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-4 sm:p-5 lg:p-7">
-              <div className="flex items-center gap-2 rounded-full border border-white/12 bg-black/30 px-3 py-1.5 text-[0.65rem] tracking-[0.24em] text-white/80 uppercase backdrop-blur-sm sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.28em]">
-                <span className="h-1.5 w-1.5 rounded-full bg-gold sm:h-2 sm:w-2" />
-                {String(activeSlide + 1).padStart(2, "0")} /{" "}
-                {String(slides.length).padStart(2, "0")}
-              </div>
-            </div>
           </div>
         </div>
 

@@ -16,11 +16,12 @@ export default function MenuSection() {
       ref={ref}
       className="relative isolate overflow-hidden text-white"
     >
-      <div className="relative mx-auto grid w-full max-w-7xl gap-12 px-4 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center lg:py-8">
-        <div className="max-w-xl">
+      <div className="relative mx-auto flex w-full max-w-7xl gap-6 px-4 py-10 sm:py-14 lg:grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center lg:gap-12 lg:py-8">
+        {/* Content */}
+        <div className="min-w-0 flex-1 lg:max-w-xl lg:flex-none">
           <div
             className={cn(
-              "text-4xl font-black tracking-[0.1em] uppercase transition-all duration-700 ease-out",
+              "text-2xl font-black tracking-[0.08em] uppercase transition-all duration-700 ease-out sm:text-3xl lg:text-4xl lg:tracking-[0.1em]",
               inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             )}
           >
@@ -29,15 +30,15 @@ export default function MenuSection() {
 
           <div
             className={cn(
-              "mt-6 h-px bg-gold/60 transition-all delay-200 duration-700 ease-out",
-              inView ? "w-28" : "w-0"
+              "mt-4 h-px bg-gold/60 transition-all delay-200 duration-700 ease-out sm:mt-6",
+              inView ? "w-20 sm:w-28" : "w-0"
             )}
           />
 
-          <div className="mt-6 overflow-hidden">
+          <div className="mt-4 overflow-hidden sm:mt-6">
             <h2
               className={cn(
-                "text-3xl leading-[0.95] font-semibold uppercase transition-transform delay-300 duration-700 ease-out sm:text-3xl",
+                "text-xl leading-[1.05] font-semibold uppercase transition-transform delay-300 duration-700 ease-out sm:text-3xl",
                 inView ? "translate-y-0" : "translate-y-full"
               )}
             >
@@ -47,7 +48,7 @@ export default function MenuSection() {
 
           <p
             className={cn(
-              "mt-6 max-w-[34rem] text-base leading-7 text-white/70 transition-all delay-500 duration-700 ease-out sm:text-lg",
+              "mt-4 max-w-[34rem] text-sm leading-6 text-white/70 transition-all delay-500 duration-700 ease-out sm:mt-6 sm:text-base sm:leading-7 lg:text-lg",
               inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             )}
           >
@@ -57,7 +58,7 @@ export default function MenuSection() {
 
           <div
             className={cn(
-              "mt-10 flex flex-wrap items-center gap-4 transition-all delay-700 duration-700 ease-out",
+              "mt-6 flex flex-wrap items-center gap-4 transition-all delay-700 duration-700 ease-out sm:mt-10",
               inView ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
             )}
           >
@@ -70,7 +71,7 @@ export default function MenuSection() {
             </Link>
           </div>
 
-          <div className="mt-10 grid max-w-lg gap-3 sm:grid-cols-2">
+          <div className="mt-6 grid max-w-lg gap-3 sm:mt-10 sm:grid-cols-2">
             <div
               style={{ transitionDelay: inView ? "850ms" : "0ms" }}
               className={cn(
@@ -104,13 +105,13 @@ export default function MenuSection() {
           </div>
         </div>
 
+        {/* Food photos — hidden below sm, narrow column sm–lg, grid on lg+ */}
         <div
           className={cn(
-            "relative transition-all delay-300 duration-1000 ease-out",
+            "relative shrink-0 transition-all delay-300 duration-1000 ease-out lg:w-full lg:flex-1",
             inView ? "scale-100 opacity-100" : "scale-95 opacity-0"
           )}
         >
-          <div />
           <CarouselFoods img={foods} />
         </div>
       </div>
